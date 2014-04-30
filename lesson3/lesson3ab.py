@@ -45,6 +45,14 @@ VOCABULARY
 
     Class Variables
         variables defined for an entire class
+        __name__
+        __doc__
+        __module__
+    Inheritance
+        class New(Old)  # class New inherits code from class Old
+        Method overriding allows a subclass to have a method of the same name
+            as one within the parent class
+
     
 '''
 import webbrowser
@@ -89,17 +97,21 @@ def main():
             midnight_in_paris, hunger_games]
 
     # fresh_tomatoes.open_movies_page(movies_array)
-    print Movie.__module__
 
-class Movie():
+class Video():
+    def __init__(self, title, duration):
+        self.title      = title
+        self.duration   = duration
+
+class Movie(Video):
     """ This class provides a blueprint for basic movie-related information"""
 
     # capitalized b/c Google says so, used: Movie.MPAA_RATINGS
     MPAA_RATINGS = ["G", "PG", "PG-13", "R", "NC-17"]
 
     # double underscores mean init is a reserved keyword
-    def __init__(self, movie_title, movie_storyline, poster_url, yt_trailer):
-        self.title          = movie_title
+    def __init__(self, movie_title, movie_storyline, duration, poster_url, yt_trailer):
+        Video.__init__(movie_title, duration)
         self.storyline      = movie_storyline
         self.poster_url     = poster_url
         self.yt_trailer_url = yt_trailer
@@ -108,7 +120,15 @@ class Movie():
         """Opens a browser and shows the movie's trailer on YouTube"""
         webbrowser.open(self.yt_trailer_url)
 
-    
+class TVShowEpisode(Video):
+    def __init__(self, title, duration, season, episode, tv_station)
+        Video.__init__(title, duration)
+        self.season     = season
+        self.episode    = episode
+        self.tv_station = tv_station
+
+    def get_local_listing():
+        
 
 
 if __name__ == "__main__":
